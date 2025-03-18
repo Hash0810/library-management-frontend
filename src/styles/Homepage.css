@@ -1,0 +1,157 @@
+/* Ensure homepage container fits the browser viewport */
+.homepage-container {
+    width: 100%; /* Stretch container to 90% of the viewport width */
+    margin-top: 214px; /* Center container horizontally */
+    min-height: 100vh; /* Full height of the viewport */
+    background-color: #f9f9f9;
+    
+}
+
+/* Navbar styles */
+.navbar {
+    width: 100%;
+    background-color: #343a40;
+    display: flex;
+    justify-content: space-between; /* Space between left and right navbar items */
+    align-items: center; /* Align items vertically in the center */
+    padding: 1rem 2rem; /* Adjust padding for a cleaner layout */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Left side of the navbar (logo or title) */
+.navbar-brand {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Navbar links */
+.navbar-links {
+    display: flex;
+    gap: 1.5rem; /* Add space between links */
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: #ffcc00;
+}
+
+/* Profile and Logout buttons */
+.navbar-buttons {
+    display: flex;
+    gap: 0.5rem; /* Space between buttons */
+}
+
+.navbar-buttons .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-buttons .btn.profile-btn {
+    background-color: #6c757d; /* Gray background for Profile */
+}
+
+.navbar-buttons .btn.profile-btn:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+}
+
+.navbar-buttons .btn.logout-btn {
+    background-color: #dc3545; /* Red background for Logout */
+}
+
+.navbar-buttons .btn.logout-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Homepage header */
+.homepage-header {
+     /* Adjust for fixed navbar height */
+    padding: 2rem 4rem;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Genres section */
+.genres-section {
+    margin-top: 2rem;
+    padding: 2rem 4rem;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.genres-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Increase gap between genres */
+    list-style: none;
+    padding: 0;
+}
+
+.genre-item {
+    padding: 1rem 1.5rem;
+    background-color: #343a40;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.genre-item:hover {
+    background-color: #495057;
+}
+
+/* Search bar styles */
+.search-bar {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.search-bar input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.search-bar button {
+    padding: 0.75rem 1.25rem;
+    width: max-content;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width:1024px){
+    .homepage-container{
+        padding-top: 8rem;
+    }
+}

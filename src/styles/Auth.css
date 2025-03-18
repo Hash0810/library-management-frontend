@@ -1,0 +1,109 @@
+/* Center the entire page */
+body {
+    margin: 0;
+    font-family:  'Segoe UI';
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Light background for contrast */
+}
+
+/* Center the login container */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center text inside form */
+}
+
+/* Form heading */
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #343a40; /* Dark gray text */
+    font-family: 'Segoe UI';
+}
+
+/* Input fields */
+.login-container input {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Segoe UI';
+}
+
+/* Primary button styles */
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font-family: 'Segoe UI';
+}
+.login-container select{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 15px; /* Adjust margin for spacing */
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    background-color: #f1f3f5; 
+    font-family: 'Segoe UI';
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    color: #333;
+}
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Secondary button styles */
+.forgot-password-btn {
+    margin-top: 10px;
+    background-color: #6c757d;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.forgot-password-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Paragraph text and links */
+.login-container p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #495057; /* Gray text */
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}

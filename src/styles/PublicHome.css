@@ -1,0 +1,106 @@
+/* src/styles/PublicHome.css */
+.public-home-container {
+    font-family: 'Segoe UI';
+    background-color: #f8f9fa;
+    color: #333;
+    text-align: center;
+    padding: 2rem;
+    min-height: 100vh; /* Ensures full height */
+}
+
+.public-header {
+    background-color: #0073e6;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.public-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.public-header p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.redirect-button {
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Segoe UI';
+    transition: background-color 0.3s ease;
+}
+
+.redirect-button:hover {
+    background-color: #e6b800;
+}
+
+.features-section {
+    padding: 2rem 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.features-section h2 {
+    font-size: 2rem;
+    color: #0073e6;
+    margin-bottom: 1.5rem;
+}
+
+.features-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.feature-item {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 250px; /* Increased width for better display */
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item h3 {
+    font-size: 1.2rem;
+    color: #0073e6;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.public-footer {
+    font-size: 0.9rem;
+    color: #0073e6;
+    margin-top: 2rem;
+}
+
+.public-footer span {
+    color: #0073e6;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+}

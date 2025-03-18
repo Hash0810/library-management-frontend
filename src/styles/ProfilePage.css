@@ -1,0 +1,121 @@
+/* Ensure profile page takes the full viewport */
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+/* Navbar styling */
+.navbar {
+    width: 100%; /* Full-width navbar */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #343a40;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+/* Content layout: Two-column grid */
+.profile-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Left column for profile details, right for tables */
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 80px; /* Ensure there is space below the sticky navbar */
+}
+
+/* Styling for the profile details section */
+.profile-details {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    color: #343a40;
+}
+
+/* Tables section styling */
+.profile-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.table-container {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.table-container h2 {
+    font-size: 1.25rem;
+    color: #343a40;
+    margin-bottom: 1rem;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.table-container table th,
+.table-container table td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-container table th {
+    background-color: #343a40;
+    color: white;
+}
+
+.table-container table td {
+    color: #495057;
+}
+table td.not-returned {
+    color: red;  /* Red for "Not Returned" */
+}
+
+table td.returned {
+    color: #007bff;  /* Blue for "Returned" */
+}
+.table-container .empty-state {
+    text-align: center;
+    padding: 1rem;
+    color: #6c757d;
+}
+
+/* No Data Styling */
+.no-data {
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .profile-content {
+        grid-template-columns: 1fr; /* Stack columns for smaller screens */
+    }
+
+    .profile-details,
+    .profile-tables {
+        width: 100%; /* Ensure both sections take full width */
+    }
+
+    .table-container table th,
+    .table-container table td {
+        padding: 0.5rem; /* Adjust table padding for smaller screens */
+    }
+}

@@ -1,0 +1,78 @@
+/* src/styles/Otp.css */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Light background for contrast */
+}
+
+.otp-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #ffffff; /* Use white for the container */
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Softer shadow for a more modern feel */
+    text-align: center; /* Center text inside form */
+}
+
+.otp-container h2 {
+    margin-bottom: 20px;
+    color: #333; /* Darker text for better contrast */
+    font-size: 1.5rem; /* Increased font size */
+}
+
+.otp-inputs {
+    display: flex;
+    justify-content: space-between; /* Space out inputs evenly */
+    margin-bottom: 20px; /* Space below inputs */
+}
+
+.otp-input {
+    width: 60px; /* Set a fixed width for inputs for uniformity */
+    height: 60px; /* Increased height for a more substantial touch area */
+    text-align: center;
+    font-size: 1.5rem;
+    border-radius: 8px; /* More subtle rounding */
+    border: 2px solid #ccc; /* Light gray border */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add glow effect on focus */
+}
+
+.error-text {
+    color: #ff4d4d; /* Red color for error messages */
+    margin-top: 10px; /* Space above error message */
+    font-weight: bold; /* Bold for emphasis */
+}
+
+.verify-button {
+    width: 100%; /* Full width button */
+    padding: 12px; /* Increased padding for better touch target */
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff; /* Primary button color */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; 
+    font-family: 'Segoe UI', sans-serif;/* Added transform for hover state */
+}
+
+.verify-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.verify-button:disabled {
+    background-color: #c0c0c0; /* Gray out button when disabled */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+}

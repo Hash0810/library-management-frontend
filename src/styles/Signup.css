@@ -1,0 +1,92 @@
+/* Center the entire page */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Light background for contrast */
+}
+
+/* Center the signup container */
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center text inside form */
+}
+
+/* Form heading */
+.signup-container h2 {
+    margin-bottom: 20px;
+    color: #343a40; /* Dark gray text */
+}
+
+/* Input fields and dropdown */
+.signup-container input,
+.signup-container select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Primary button styles */
+.signup-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.signup-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Paragraph text and links */
+.signup-container p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #495057; /* Gray text */
+}
+
+.signup-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-container a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .signup-container {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .signup-container button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .signup-container input,
+    .signup-container select {
+        font-size: 13px;
+        padding: 8px;
+    }
+}

@@ -1,0 +1,133 @@
+/* Navbar Base Styles */
+.navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between; /* Adjusted to remove the extra space */
+  align-items: center;
+  background-color: #343a40;
+  padding: 1rem 1.5rem;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styling */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  margin-right: auto; /* Small gap between the logo and the menu */
+}
+
+/* 🖥️ Desktop Styles (Make menu visible) */
+.navbar-menu {
+  display: flex;  /* Always visible on desktop */
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Navbar Links */
+.navbar-links {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: #495057;
+}
+
+/* Navbar Actions (Dashboard & Logout) */
+.navbar-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  font-family: 'Segoe UI';
+}
+
+/* Buttons Styling */
+.navbar-btn {
+  background-color: #495057;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-btn:hover {
+  background-color: #6c757d;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* 🛠️ Hamburger Menu (Hidden on Desktop) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* 📱 Mobile Styles */
+@media only screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Show hamburger icon */
+  }
+
+  /* Hide menu by default on mobile */
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #343a40;
+    position: absolute;
+    top: 60px; /* Adjust based on navbar height */
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  /* Show menu when active */
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  /* Make links and buttons full-width */
+  .navbar-links,
+  .navbar-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-links a,
+  .navbar-btn {
+    width: 100%;
+  }
+}

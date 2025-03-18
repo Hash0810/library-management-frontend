@@ -1,0 +1,156 @@
+/* AdminDashboard.css */
+
+.admin-dashboard {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.dashboard-container {
+  font-family: 'Segoe UI', sans-serif;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding does not cause overflow */
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+button.toggle-btn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.toggle-btn:hover {
+  background-color: #2980b9;
+}
+
+.inventory-section,
+.add-user-section {
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure full-width container */
+  max-width: 600px; /* Limit width of form */
+  margin-left: auto; /* Center align form */
+  margin-right: auto; /* Center align form */
+  box-sizing: border-box; /* Ensure padding does not cause overflow */
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.inventory-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.inventory-list li {
+  background-color: #f1f1f1;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.inventory-list li:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.add-user-section input,
+.add-user-section select {
+  font-family: 'Segoe UI', sans-serif;
+  width: 100%; /* Ensure inputs and select take full width */
+  padding: 12px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box; /* Include padding in width calculation */
+  transition: border-color 0.3s;
+}
+
+.add-user-section input:focus,
+.add-user-section select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.add-user-section button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  width: 100%; /* Ensure the button spans the entire width */
+  max-width: 200px; /* Limit the button's width */
+  margin-top: 10px; /* Space out from inputs */
+  margin-left: auto; /* Center align the button */
+  margin-right: auto; /* Center align the button */
+}
+
+.add-user-section button:hover {
+  background-color: #27ae60;
+}
+
+.add-user-section button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.toggle-btn,
+.add-user-section button {
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+      width: 90%;
+      padding: 20px;
+  }
+
+  .inventory-section,
+  .add-user-section {
+      margin-top: 20px;
+  }
+
+  .add-user-section input,
+  .add-user-section select,
+  .add-user-section button {
+      width: 100%; /* Ensure full-width form inputs on small screens */
+  }
+}
