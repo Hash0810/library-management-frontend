@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/admin',
+    baseURL: 'https://library-management-backend-6yne.onrender.com',
 });
 
 export default api;
