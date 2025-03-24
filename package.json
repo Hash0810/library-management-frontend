@@ -43,7 +43,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "https://library-management-backend-6yne.onrender.com",
   "browserslist": {
     "production": [
       ">0.2%",
