@@ -43,7 +43,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://library-management-backend-6yne.onrender.com",
   "browserslist": {
     "production": [
       ">0.2%",
