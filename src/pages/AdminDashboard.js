@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../api";
 import "../styles/AdminDashboard.css";
 
 function AdminDashboard() {
@@ -15,7 +15,7 @@ function AdminDashboard() {
     useEffect(() => {
         const username = localStorage.getItem("username"); // Retrieve username from localStorage
         if (username) {
-            axios.get(`/api/u/profile?username=${username}`)
+            api.get(`/api/u/profile?username=${username}`)
                 .then((res) => {
                     setUserRole(res.data.role); // Set role from API response
                     localStorage.setItem("role", res.data.role); // Store role in localStorage for future use
