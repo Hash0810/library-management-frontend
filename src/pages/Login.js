@@ -1,7 +1,7 @@
 // src/pages/Login.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import api from './api';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
 
@@ -16,7 +16,7 @@ function Login({ setIsOtpVerified }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/u/login', { username, password });
+            const response = await api.post('/api/u/login', { username, password });
             localStorage.setItem('otpEmail', response.data.email);
             localStorage.setItem('otpType', 'login'); // Set type for OTP verification
             localStorage.setItem('isAuthenticated', 'false');
