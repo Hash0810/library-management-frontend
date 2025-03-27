@@ -7,17 +7,17 @@ const Homepage = () => {
     const [userRole, setUserRole] = useState(null); // State to store user role
 
     useEffect(() => {
-        const username = localStorage.getItem("username"); // Retrieve username from localStorage
-        if (username) {
-            api.get(`/api/u/profile?username=${username}`)
-                .then((res) => {
-                    setUserRole(res.data.role); // Set role from API response
-                    localStorage.setItem("role", res.data.role); // Store role in localStorage for future use
-                })
-                .catch((err) => console.error("Error fetching user role:", err));
-        }
-    }, []);
-
+    const username = localStorage.getItem("username"); // Retrieve username from localStorage
+    if (username) {
+      api.post(`/api/u/profile`, { username }) // Sending username in request body
+        .then((res) => {
+          setUserRole(res.data.role); // Set role from API response
+          localStorage.setItem("role", res.data.role); // Store role in localStorage for future use
+        })
+        .catch((err) => console.error("Error fetching user role:", err));
+    }
+  }, []);
+    
     const genres = ["Fiction", "Non-Fiction", "Science", "Romance", "Horror", "History"];
 
     return (
