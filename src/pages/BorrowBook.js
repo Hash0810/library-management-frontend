@@ -14,7 +14,7 @@ function BorrowBook() {
     try {
       const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
       const response = await api.post("/api/u/books/borrow", new URLSearchParams({ username, bookId }), {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: { "Content-Type": "application/json" },
       });
 
       setMessage(response.data);
