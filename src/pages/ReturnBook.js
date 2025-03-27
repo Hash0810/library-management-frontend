@@ -14,9 +14,9 @@ function ReturnBook() {
     }
 
     const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
-
+    const bookIdInt = parseInt(bookId, 10);
     try {
-      const response = await api.post("/api/u/books/return", { username, bookId }, {
+      const response = await api.post("/api/u/books/return", { username, bookIdInt }, {
         headers: { "Content-Type": "application/json" },
       });
 
