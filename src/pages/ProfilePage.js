@@ -13,8 +13,8 @@ const ProfilePage = () => {
     useEffect(() => {
         const username = localStorage.getItem("username");
         api.post(`/api/u/profile`, { username }).then((res) => setUserDetails(res.data));
-        api.get(`/api/u/book-history?username=${username}`).then((res) => setBookHistory(res.data));
-        api.get(`/api/u/fine-history?username=${username}`).then((res) => setFineHistory(res.data));
+        api.post(`/api/u/book-history`, { username }).then((res) => setBookHistory(res.data));
+        api.post(`/api/u/fine-history`, { username }).then((res) => setFineHistory(res.data));
     }, []);
 
     return (
