@@ -31,50 +31,51 @@ const OTPVerification = ({ onSuccess }) => {
     };
 
     const handleSubmit = async () => {
-        const otpValue = otp.join("");
-        if (otpValue.length !== 4) {
-            setError("Please enter a 4-digit OTP.");
+    const otpValue = otp.join("");
+    if (otpValue.length !== 4) {
+        setError("Please enter a 4-digit OTP.");
+        return;
+    }
+    setIsLoading(true);
+    setError("");
+    try {
+        const urlMap = {
+            signup: "/api/u/verify-signup-otp",
+            login: "/api/u/verify-login-otp",
+            "reset-password": "/api/u/verify-reset-password-otp",
+            "admin-signup": "/api/u/verify-admin-signup-otp",
+        };
+        const url = urlMap[type]; 
+        if (!url) {
+            setError("Invalid OTP type.");
             return;
         }
-        setIsLoading(true);
-        setError("");
-        try {
-            const urlMap = {
-                signup: "/api/u/verify-signup-otp",
-                login: "/api/u/verify-login-otp",
-                "reset-password": "/api/u/verify-reset-password-otp",
-                "admin-signup": "/api/u/verify-admin-signup-otp",
-            };
-            const url = urlMap[type]; // Use 'type' from local storage
-            const params = `email=${encodeURIComponent(email)}`;
-            const response = await api.post(`${urlMap[type]}?email=${encodeURIComponent(email)}&otp=${otpValue}`,
-                {}, // Proper way to indicate no body
-              {
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                }
-              }
-            );
-            if (response.data.includes("successful")) {
-                if (response.data.username) {
-                    localStorage.setItem("username", response.data.username);
-                }
-                if (type === "reset-password") {
-                    onSuccess(); // Call success callback to navigate to reset password
-                    navigate("/reset-password"); // Redirect to reset password page
-                } else {
-                    onSuccess(); // Call success callback for other types
-                    navigate("/", { replace: true });
-                }
+
+        const response = await api.post(url, {
+            email: email,
+            otp: otpValue
+        }, {
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (response.data.includes("successful")) {
+            if (type === "reset-password") {
+                onSuccess();
+                navigate("/reset-password"); 
             } else {
-                setError("Invalid OTP. Please try again.");
+                onSuccess();
+                navigate("/", { replace: true });
             }
-        } catch (error) {
-            setError("Failed to verify OTP. Please try again.");
-        } finally {
-            setIsLoading(false);
+        } else {
+            setError("Invalid OTP. Please try again.");
         }
-    };
+    } catch (error) {
+        setError("Failed to verify OTP. Please try again.");
+    } finally {
+        setIsLoading(false);
+    }
+};
+
 
     return (
         <div className="otp-container">
