@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import api from "../api";
 import Navbar from "../components/Navbar"; // Adjust path as needed
 import "../styles/AddBook.css";
 function AddBook() {
@@ -18,7 +19,7 @@ function AddBook() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/librarian/addBook", book, {
+      const response = await api.post("/librarian/addBook", book, {
         headers: { "Content-Type": "application/json" },
       });
 
