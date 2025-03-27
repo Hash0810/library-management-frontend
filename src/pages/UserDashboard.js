@@ -2,21 +2,22 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/UserDashboard.css";
+import api from "../api";
 
 function UserDashboard({ role }) {
     const [books, setBooks] = useState([]);
     const username = localStorage.getItem("username");
-
     useEffect(() => {
-        fetch("/api/u/books/available")
-            .then((response) => response.json())
-            .then((data) => setBooks(data));
+        api.get("/api/u/books/available")
+            .then((response) => setBooks(response.data))
+            .catch((error) => console.error("Error fetching books:", error));
     }, []);
-
     const borrowBook = (bookId) => {
-        fetch(`/api/u/books/borrow?username=${username}&bookId=${bookId}`, { method: "POST" })
-            .then((response) => response.text())
-            .then((message) => alert(message));
+        api.post(`/api/u/books/borrow`, null, {
+            params: { username: username, bookId: bookId }
+        })
+        .then((response) => alert(response.data))
+        .catch((error) => console.error("Error borrowing book:", error));
     };
 
     return (

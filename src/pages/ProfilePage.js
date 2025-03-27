@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import Navbar from "../components/Navbar"; // Add Navbar import
 import "../styles/ProfilePage.css";
 
@@ -12,9 +12,9 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const username = localStorage.getItem("username");
-        axios.get(`/api/u/profile?username=${username}`).then((res) => setUserDetails(res.data));
-        axios.get(`/api/u/book-history?username=${username}`).then((res) => setBookHistory(res.data));
-        axios.get(`/api/u/fine-history?username=${username}`).then((res) => setFineHistory(res.data));
+        api.get(`/api/u/profile?username=${username}`).then((res) => setUserDetails(res.data));
+        api.get(`/api/u/book-history?username=${username}`).then((res) => setBookHistory(res.data));
+        api.get(`/api/u/fine-history?username=${username}`).then((res) => setFineHistory(res.data));
     }, []);
 
     return (

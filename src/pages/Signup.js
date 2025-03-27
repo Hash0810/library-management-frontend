@@ -1,7 +1,7 @@
 // src/pages/Signup.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import api from '../api';
 import '../styles/Auth.css';
 import { Link,useNavigate } from 'react-router-dom';
 import OTPVerification from './OTPVerification';
@@ -27,7 +27,7 @@ function Signup() {
             return;
         }
         try {
-            const response = await axios.post('/api/u/signup', formData);
+            const response = await api.post('/api/u/signup', formData);
             localStorage.setItem('otpEmail', formData.email);
             localStorage.setItem('otpType', 'signup');
             setShowOtpVerification(true);

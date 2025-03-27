@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../api";
 import "../styles/AdminDashboard.css";
 
 function AdminDashboard() {
@@ -15,20 +15,19 @@ function AdminDashboard() {
     useEffect(() => {
         const username = localStorage.getItem("username"); // Retrieve username from localStorage
         if (username) {
-            axios.get(`/api/u/profile?username=${username}`)
+            api.get(`/api/u/profile?username=${username}`)
                 .then((res) => {
                     setUserRole(res.data.role); // Set role from API response
                     localStorage.setItem("role", res.data.role); // Store role in localStorage for future use
                 })
                 .catch((err) => console.error("Error fetching user role:", err));
         }
-        // Fetch inventory
-        fetch("/admin/getInventory")
-            .then((res) => res.json())
-            .then((data) => setLibraryInventory(data))
+
+        // Fetch inventory using axios
+        api.get("/admin/getInventory")
+            .then((res) => setLibraryInventory(res.data))
             .catch((error) => console.error("Error fetching inventory:", error));
     }, []);
-
     const toggleView = () => {
         setShowInventory(!showInventory);
     };

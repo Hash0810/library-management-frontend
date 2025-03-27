@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/Adminpage.css";
+import api from "../api";
 
 const BookInventory = () => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const userRole = localStorage.getItem("role")?.toUpperCase()
     useEffect(() => {
-        fetch("/librarian/bookInventory")
-          .then((response) => response.json())
-          .then((data) => {
+        api.get("/librarian/bookInventory")
+          .then((response) => {
+            const data = response.data;
             if (Array.isArray(data)) {
               setBooks(data); // ✅ Only set if data is an array
             } else {

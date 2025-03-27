@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../api";
 import "../styles/Adminpage.css";
 
 const LibrarianInfo = () => {
@@ -8,7 +8,7 @@ const LibrarianInfo = () => {
     const userRole = localStorage.getItem("role")?.toUpperCase();
     useEffect(() => {
         const fetchLibrarians = async () => {
-            const response = await axios.get("/api/u/librarians");
+            const response = await api.get("/api/u/librarians");
             setLibrarians(response.data);
         };
         fetchLibrarians();

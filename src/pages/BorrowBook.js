@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/style.css";
+import api from "../api";
 function BorrowBook() {
   const [bookId, setBookId] = useState("");
   const [message, setMessage] = useState("");
@@ -10,16 +11,23 @@ function BorrowBook() {
       setMessage("Please enter a valid book ID.");
       return;
     }
+    try {
+      const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
+      const response = await api.post("/api/u/books/borrow", new URLSearchParams({ username, bookId }), {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
 
+      setMessage(response.data);
+    } catch (error) {
+      console.error("Error borrowing book:", error);
+      setMessage("Failed to borrow book. Please try again.");
+    }
     const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
 
     try {
-      const response = await fetch("/api/u/books/borrow", {
-        method: "POST",
+      const response = await api.post("/api/u/books/borrow", new URLSearchParams({ username, bookId }), {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ username, bookId }),
       });
-
       const result = await response.text();
       setMessage(result);
     } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import Navbar from "../components/Navbar";
 import "../styles/BookHistory.css"; // Separate CSS for styling
 
@@ -12,7 +12,7 @@ const BookHistory = () => {
     const username = localStorage.getItem("username");
 
     useEffect(() => {
-        axios.get(`/api/u/book-history?username=${username}`)
+        api.get(`/api/u/book-history?username=${username}`)
             .then((res) => setBookHistory(res.data))
             .catch((error) => console.error("Error fetching book history:", error));
     }, [username]);

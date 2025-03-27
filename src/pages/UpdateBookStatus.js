@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../api";
 
 const UpdateBookStatus = () => {
     const [bookId, setBookId] = useState("");
@@ -9,7 +9,7 @@ const UpdateBookStatus = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`/librarian/updateBookStatus?bookId=${bookId}&isAvailable=${isAvailable}`);
+            await api.put(`/librarian/updateBookStatus?bookId=${bookId}&isAvailable=${isAvailable}`);
             alert("Book status updated!");
             setBookId("");
         } catch (error) {

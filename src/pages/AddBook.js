@@ -8,6 +8,8 @@ function AddBook() {
     genre: "",
     available: true,
   });
+
+  
   const userRole = localStorage.getItem("role")?.toUpperCase();
   const handleChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
@@ -16,13 +18,11 @@ function AddBook() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/librarian/addBook", {
-        method: "POST",
+      const response = await axios.post("/librarian/addBook", book, {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(book),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         alert("Book added successfully!");
         setBook({ bookName: "", author: "", genre: "", available: true });
       } else {
@@ -30,6 +30,13 @@ function AddBook() {
       }
     } catch (error) {
       console.error("Error:", error);
+      if (error.response) {
+        alert(`Error: ${error.response.data.message || "Failed to add book."}`);
+      } else if (error.request) {
+        alert("Error: No response from server.");
+      } else {
+        alert("Error: Something went wrong.");
+      }
     }
   };
 

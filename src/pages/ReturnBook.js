@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/style.css";
+import api from "../api";
 
 function ReturnBook() {
   const [bookId, setBookId] = useState("");
@@ -15,10 +16,8 @@ function ReturnBook() {
     const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
 
     try {
-      const response = await fetch("/api/u/books/return", {
-        method: "POST",
+      const response = await api.post("/api/u/books/return", new URLSearchParams({ username, bookId }), {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ username, bookId }),
       });
 
       const result = await response.text();

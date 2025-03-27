@@ -1,7 +1,7 @@
 // src/pages/OTPVerification.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 import '../styles/Otp.css';
 // src/pages/OTPVerification.js
 
@@ -47,7 +47,7 @@ const OTPVerification = ({ onSuccess }) => {
             };
             const url = urlMap[type]; // Use 'type' from local storage
             const params = `email=${encodeURIComponent(email)}`;
-            const response = await axios.post(`${url}?${params}&otp=${encodeURIComponent(otpValue)}`);
+            const response = await api.post(`${url}?${params}&otp=${encodeURIComponent(otpValue)}`);
             if (response.data.includes("successful")) {
                 if (response.data.username) {
                     localStorage.setItem("username", response.data.username);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/Signup.css';
@@ -38,7 +38,7 @@ function AdminSignup() {
         }
 
         try {
-            const response = await axios.post('/api/u/admin-signup', formData);
+            const response = await api.post('/api/u/admin-signup', formData);
             
             
             localStorage.setItem('otpEmail', formData.email);

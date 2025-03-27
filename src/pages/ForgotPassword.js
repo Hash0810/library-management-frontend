@@ -1,6 +1,6 @@
 // src/pages/ForgotPassword.js
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { useNavigate } from "react-router-dom";
 import OTPVerification from "./OTPVerification";
 import "../styles/Auth.css";
@@ -15,7 +15,7 @@ function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("/api/u/reset-password-initiate", { email });
+            const response = await api.post("/api/u/reset-password-initiate", { email });
             if (response.data.includes("OTP has been sent")) {
                 setMessage(response.data);
                 localStorage.setItem("resetEmail", email); // Store the email for later use

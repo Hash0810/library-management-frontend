@@ -1,6 +1,6 @@
 // src/pages/ResetPassword.js
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
 
@@ -23,7 +23,7 @@ function ResetPassword() {
                 email: localStorage.getItem("resetEmail"), // Use the stored email
                 newPassword: password,
             };
-            const response = await axios.post("/api/u/reset-password", resetPasswordData);
+            const response = await api.post("/api/u/reset-password", resetPasswordData);
             if (response.data.includes("successful")) {
                 setMessage("Password reset successful! Redirecting to login page...");
                 localStorage.removeItem("resetEmail"); // Clear the email from local storage

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import Navbar from "../components/Navbar"; // Add Navbar import
 import "../styles/Homepage.css";
 
@@ -9,7 +9,7 @@ const Homepage = () => {
     useEffect(() => {
         const username = localStorage.getItem("username"); // Retrieve username from localStorage
         if (username) {
-            axios.get(`/api/u/profile?username=${username}`)
+            api.get(`/api/u/profile?username=${username}`)
                 .then((res) => {
                     setUserRole(res.data.role); // Set role from API response
                     localStorage.setItem("role", res.data.role); // Store role in localStorage for future use
