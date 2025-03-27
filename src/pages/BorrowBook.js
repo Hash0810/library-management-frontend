@@ -11,6 +11,7 @@ function BorrowBook() {
       setMessage("Please enter a valid book ID.");
       return;
     }
+    const bookIdInt = parseInt(bookId, 10);
     try {
       const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
       const response = await api.post("/api/u/books/borrow", { username, bookId }, {
@@ -25,7 +26,7 @@ function BorrowBook() {
     const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
 
     try {
-      const response = await api.post("/api/u/books/borrow", { username, bookId }, {
+      const response = await api.post("/api/u/books/borrow", { username, bookIdInt }, {
         headers: { "Content-Type": "application/json" },
       });
       const result = await response.text();
