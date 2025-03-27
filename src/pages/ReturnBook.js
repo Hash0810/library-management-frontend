@@ -16,8 +16,8 @@ function ReturnBook() {
     const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
 
     try {
-      const response = await api.post("/api/u/books/return", new URLSearchParams({ username, bookId }), {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      const response = await api.post("/api/u/books/return", { username, bookId }, {
+        headers: { "Content-Type": "application/json" },
       });
 
       const result = await response.text();
