@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../api";
 import "../styles/Adminpage.css";
 
 const AddAdmin = () => {
@@ -13,7 +13,7 @@ const AddAdmin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("/admin/add-admin", formData);
+            await api.post("/admin/add-admin", formData);
             alert("Admin account created! Please verify via OTP.");
         } catch (error) {
             alert("Failed to create admin: " + (error.response?.data?.message || "Unknown error"));

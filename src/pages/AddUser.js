@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import api from "../api";
 import "../styles/Adminpage.css";
 
 const AddUser = () => {
@@ -14,7 +14,7 @@ const AddUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("/admin/add-user", formData);
+            await api.post("/admin/add-user", formData);
             alert("User added successfully!");
         } catch (error) {
             alert("Failed to add user: " + (error.response?.data?.message || "Unknown error"));
