@@ -59,6 +59,10 @@ const OTPVerification = ({ onSuccess }) => {
         });
 
         if (response.data.includes("successful")) {
+            localStorage.setItem('isAuthenticated', 'true');
+            if (response.data.username) {
+                localStorage.setItem("username", response.data.username);
+            }
             if (type === "reset-password") {
                 onSuccess();
                 navigate("/reset-password"); 
