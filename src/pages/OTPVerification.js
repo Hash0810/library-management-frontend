@@ -48,7 +48,7 @@ const OTPVerification = ({ onSuccess }) => {
             const url = urlMap[type]; // Use 'type' from local storage
             const params = `email=${encodeURIComponent(email)}`;
             const response = await api.post(`${urlMap[type]}?email=${encodeURIComponent(email)}&otp=${otpValue}`,
-              undefined, // Proper way to indicate no body
+                {}, // Proper way to indicate no body
               {
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
