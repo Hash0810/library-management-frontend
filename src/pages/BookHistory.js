@@ -12,7 +12,7 @@ const BookHistory = () => {
     const username = localStorage.getItem("username");
 
     useEffect(() => {
-        api.get(`/api/u/book-history?username=${username}`)
+        api.post(`/api/u/book-history`, { username })
             .then((res) => setBookHistory(res.data))
             .catch((error) => console.error("Error fetching book history:", error));
     }, [username]);
