@@ -5,24 +5,29 @@ import "../styles/BookHistory.css"; // Separate CSS for styling
 
 const BookHistory = () => {
     const [bookHistory, setBookHistory] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0); // Backend pages start from 0
     const recordsPerPage = 10;
+    const [totalPages, setTotalPages] = useState(1); // Track total pages
 
     const userRole = localStorage.getItem("role");
     const username = localStorage.getItem("username");
 
     useEffect(() => {
-        api.post(`/api/u/book-history`, { username })
-            .then((res) => setBookHistory(res.data))
-            .catch((error) => console.error("Error fetching book history:", error));
-    }, [username]);
+        fetchBookHistory(currentPage);
+    }, [currentPage]); // Refetch data when page changes
 
-    // Pagination logic
-    const indexOfLastRecord = currentPage * recordsPerPage;
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = bookHistory.slice(indexOfFirstRecord, indexOfLastRecord);
-
-    const totalPages = Math.ceil(bookHistory.length / recordsPerPage);
+    const fetchBookHistory = (page) => {
+        api.post("/api/u/book-history", { 
+                username, 
+                page,    // Send page number in request body
+                size: recordsPerPage 
+        })
+        .then((res) => {
+            setBookHistory(res.data.content);
+            setTotalPages(res.data.totalPages); // Update total pages from response
+        })
+        .catch((error) => console.error("Error fetching book history:", error));
+    };
 
     return (
         <div className="book-history-container">
@@ -40,8 +45,8 @@ const BookHistory = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentRecords.length > 0 ? (
-                            currentRecords.map((transaction, index) => (
+                        {bookHistory.length > 0 ? (
+                            bookHistory.map((transaction, index) => (
                                 <tr key={index}>
                                     <td>{transaction.book.bookName}</td>
                                     <td>{transaction.book.author}</td>
@@ -58,19 +63,19 @@ const BookHistory = () => {
                 </table>
 
                 {/* Pagination Controls */}
-                {bookHistory.length > recordsPerPage && (
+                {totalPages > 1 && (
                     <div className="pagination">
                         <button 
                             className="nav-button" 
-                            disabled={currentPage === 1} 
+                            disabled={currentPage === 0} 
                             onClick={() => setCurrentPage(currentPage - 1)}
                         >
                             &lt;
                         </button>
-                        <span>Page {currentPage} of {totalPages}</span>
+                        <span>Page {currentPage + 1} of {totalPages}</span>
                         <button 
                             className="nav-button" 
-                            disabled={currentPage === totalPages} 
+                            disabled={currentPage + 1 === totalPages} 
                             onClick={() => setCurrentPage(currentPage + 1)}
                         >
                             &gt;
