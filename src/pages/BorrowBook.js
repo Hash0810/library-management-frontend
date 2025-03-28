@@ -7,32 +7,27 @@ function BorrowBook() {
   const [message, setMessage] = useState("");
   const userRole = localStorage.getItem("role")?.toUpperCase();
   const handleBorrow = async () => {
-    if (!bookId) {
-      setMessage("Please enter a valid book ID.");
-      return;
-    }
-    const bookIdInt = parseInt(bookId, 10);
-    try {
-      const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
-      const response = await api.post("/api/u/books/borrow", { username, bookIdInt });
-      setMessage(response.data);
-    } catch (error) {
-      console.error("Error borrowing book:", error);
-      setMessage("Failed to borrow book. Please try again.");
-    }
-    const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
+  if (!bookId.trim()) {
+    setMessage("Please enter a valid book ID.");
+    return;
+  }
 
-    try {
-      const response = await api.post("/api/u/books/borrow", { username, bookIdInt }, {
-        headers: { "Content-Type": "application/json" },
-      });
-      const result = await response.text();
-      setMessage(result);
-    } catch (error) {
-      console.error("Error borrowing book:", error);
-      setMessage("Failed to borrow book. Please try again.");
-    }
-  };
+  const bookIdInt = parseInt(bookId, 10);
+  if (isNaN(bookIdInt) || bookIdInt <= 0) {
+    setMessage("Invalid book ID.");
+    return;
+  }
+
+  try {
+    const username = localStorage.getItem("username");
+    const response = await api.post("/api/u/books/borrow", { username, bookId: bookIdInt });
+
+    setMessage(response.data);
+  } catch (error) {
+    console.error("Error borrowing book:", error.response?.data || error.message);
+    setMessage(error.response?.data || "Failed to borrow book. Please try again.");
+  }
+};
 
   return (
     <div>
