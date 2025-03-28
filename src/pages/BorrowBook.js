@@ -14,10 +14,7 @@ function BorrowBook() {
     const bookIdInt = parseInt(bookId, 10);
     try {
       const username = localStorage.getItem("username"); // Assuming username is stored in localStorage
-      const response = await api.post("/api/u/books/borrow", { username, bookIdInt }, {
-        headers: { "Content-Type": "application/json" },
-      });
-
+      const response = await api.post("/api/u/books/borrow", { username, bookIdInt });
       setMessage(response.data);
     } catch (error) {
       console.error("Error borrowing book:", error);
