@@ -43,6 +43,7 @@ const BookInventory = () => {
                                     <th>Author</th>
                                     <th>Genre</th>
                                     <th>Available</th>
+                                    <th>Books Count</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,6 +54,7 @@ const BookInventory = () => {
                                         <td>{book.author}</td>
                                         <td>{book.genre}</td>
                                         <td className={book.available ? "available-yes" : "available-no"}>{book.available ? "Yes" : "No"}</td>
+                                        <td>{book.copies}</td>
                                     </tr>
                                 ))}
                             </tbody>
