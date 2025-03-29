@@ -8,13 +8,17 @@ function AddBook() {
     author: "",
     genre: "",
     available: true,
+    copies: 1,
   });
 
   
   const userRole = localStorage.getItem("role")?.toUpperCase();
   const handleChange = (e) => {
-    setBook({ ...book, [e.target.name]: e.target.value });
-  };
+    const { name, value } = e.target;
+    setBook({
+      ...book,
+      [name]: name === "copies" ? parseInt(value) || 0 : value,
+    });};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +77,15 @@ function AddBook() {
             onChange={handleChange}
             required
           />
-
+          <label>Number of Copies:</label>
+          <input
+            type="number"
+            name="copies"
+            min="1"
+            value={book.copies}
+            onChange={handleChange}
+            required
+          />
           <button type="submit" className="add-btn">Add Book</button>
         </form>
       </div>
