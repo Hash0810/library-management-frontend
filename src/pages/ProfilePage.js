@@ -26,7 +26,12 @@ const ProfilePage = () => {
                     page: 0,
                     size: 5
                 });
-                setBookHistory(bookRes.data.content);
+                if (bookRes.data && bookRes.data.content) {
+                    setBookHistory(bookRes.data.content);
+                } else {
+                    setBookHistory([]); // Set empty array if content is missing
+                }
+
 
                 // Fetch fine history
                 const fineRes = await api.post(`/api/u/fine-history`, { username });
