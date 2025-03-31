@@ -20,7 +20,8 @@ const BookHistory = () => {
         const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
         setSortBy(field);
         setSortOrder(newSortOrder);
-        setCurrentPage(0); // Reset to the first page when sorting
+        setCurrentPage(0); 
+        fetchBookHistory(0);// Reset to the first page when sorting
     };
 
     const fetchBookHistory = (page) => {
