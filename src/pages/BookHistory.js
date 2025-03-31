@@ -8,19 +8,28 @@ const BookHistory = () => {
     const [currentPage, setCurrentPage] = useState(0); // Backend pages start from 0
     const recordsPerPage = 10;
     const [totalPages, setTotalPages] = useState(1); // Track total pages
-
+    const [sortBy, setSortBy] = useState("borrowDate");
+    const [sortOrder, setSortOrder] = useState("asc");
     const userRole = localStorage.getItem("role");
     const username = localStorage.getItem("username");
 
     useEffect(() => {
         fetchBookHistory(currentPage);
     }, [currentPage]); // Refetch data when page changes
+    const handleSort = (field) => {
+        const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
+        setSortBy(field);
+        setSortOrder(newSortOrder);
+        setCurrentPage(0); // Reset to the first page when sorting
+    };
 
     const fetchBookHistory = (page) => {
         api.post("/api/u/book-history", { 
                 username, 
                 page,    // Send page number in request body
-                size: recordsPerPage 
+                size: recordsPerPage,
+                sortBy,
+                sortOrder,
         })
         .then((res) => {
             setBookHistory(res.data.content);
@@ -41,7 +50,7 @@ const BookHistory = () => {
                             <th>Title</th>
                             <th>Author</th>
                             <th>Borrowed Date</th>
-                            <th>Returned Date</th>
+                            <th onClick={() => handleSort("returnedDate")} >Returned Date</th>
                         </tr>
                     </thead>
                     <tbody>
