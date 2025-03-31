@@ -8,7 +8,7 @@ const BookHistory = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const recordsPerPage = 10;
     const [totalPages, setTotalPages] = useState(1);
-    const [sortBy, setSortBy] = useState("returnedDate");
+    const [sortBy, setSortBy] = useState("returnDate");
     const [sortOrder, setSortOrder] = useState("asc"); // Default ascending order
     const userRole = localStorage.getItem("role");
     const username = localStorage.getItem("username");
@@ -49,8 +49,8 @@ const BookHistory = () => {
                             <th>Title</th>
                             <th>Author</th>
                             <th>Borrowed Date</th>
-                            <th onClick={() => handleSort("returnedDate")} style={{cursor: "pointer"}}>
-                                Returned Date {sortBy === "returnedDate" ? (sortOrder === "asc" ? "⬆️" : "⬇️") : ""}
+                            <th onClick={() => handleSort("returnDate")} style={{cursor: "pointer"}}>
+                                Returned Date {sortBy === "returnDate" ? (sortOrder === "asc" ? "⬆️" : "⬇️") : ""}
                             </th>
                         </tr>
                     </thead>
