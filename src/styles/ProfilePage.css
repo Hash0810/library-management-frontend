@@ -102,7 +102,14 @@ table td.returned {
     font-style: italic;
     text-align: center;
 }
-
+.view-all-link {
+    display: inline-block;
+    background-color: #343a40;
+}
+.view-all-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .profile-content {
