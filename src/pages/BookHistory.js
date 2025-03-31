@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
 import Navbar from "../components/Navbar";
-import "../styles/BookHistory.css"; // Separate CSS for styling
+import "../styles/BookHistory.css";
 
 const BookHistory = () => {
     const [bookHistory, setBookHistory] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0); // Backend pages start from 0
+    const [currentPage, setCurrentPage] = useState(0);
     const recordsPerPage = 10;
-    const [totalPages, setTotalPages] = useState(1); // Track total pages
-    const [sortBy, setSortBy] = useState("borrowDate");
-    const [sortOrder, setSortOrder] = useState("asc");
+    const [totalPages, setTotalPages] = useState(1);
+    const [sortBy, setSortBy] = useState("returnedDate");
+    const [sortOrder, setSortOrder] = useState("asc"); // Default ascending order
     const userRole = localStorage.getItem("role");
     const username = localStorage.getItem("username");
 
     useEffect(() => {
         fetchBookHistory(currentPage);
-    }, [currentPage]); // Refetch data when page changes
+    }, [currentPage, sortBy, sortOrder]); // Re-fetch when sorting changes
+
     const handleSort = (field) => {
-        const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
         setSortBy(field);
-        setSortOrder(newSortOrder);
-        setCurrentPage(0); 
-        fetchBookHistory(0);// Reset to the first page when sorting
+        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     };
 
     const fetchBookHistory = (page) => {
-        api.post("/api/u/book-history", { 
+        api.post("/api/u/book-history", {
                 username, 
-                page,    // Send page number in request body
+                page,  
                 size: recordsPerPage,
                 sortBy,
                 sortOrder,
         })
         .then((res) => {
             setBookHistory(res.data.content);
-            setTotalPages(res.data.totalPages); // Update total pages from response
+            setTotalPages(res.data.totalPages);
         })
         .catch((error) => console.error("Error fetching book history:", error));
     };
@@ -51,7 +49,9 @@ const BookHistory = () => {
                             <th>Title</th>
                             <th>Author</th>
                             <th>Borrowed Date</th>
-                            <th onClick={() => handleSort("returnedDate")} >Returned Date</th>
+                            <th onClick={() => handleSort("returnedDate")} style={{cursor: "pointer"}}>
+                                Returned Date {sortBy === "returnedDate" ? (sortOrder === "asc" ? "⬆️" : "⬇️") : ""}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,7 +72,6 @@ const BookHistory = () => {
                     </tbody>
                 </table>
 
-                {/* Pagination Controls */}
                 {totalPages > 1 && (
                     <div className="pagination">
                         <button 
