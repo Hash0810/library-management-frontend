@@ -104,11 +104,11 @@ table td.returned {
 }
 .view-all-link {
     display: inline-block;
-    background-color: #343a40;
+    background-color: #6c757d;
 }
 .view-all-link:hover {
     text-decoration: underline;
-    color: #0056b3;
+    color: #343a40;
 }
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
