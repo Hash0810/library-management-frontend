@@ -71,11 +71,7 @@ const ProfilePage = () => {
                     <div className="table-container">
                         <div className="table-header">
                             <h2>Recent Book History</h2>
-                            {bookHistory.length >= 5 && (
-                                <Link to="/book-history" className="view-all-link">
-                                    View All
-                                </Link>
-                            )}
+                            
                         </div>
                         <table>
                             <thead>
@@ -105,6 +101,11 @@ const ProfilePage = () => {
                                 )}
                             </tbody>
                         </table>
+                        {bookHistory.length >= 5 && (
+                                <Link to="/book-history" className="view-all-link">
+                                    View All
+                                </Link>
+                        )}
                     </div>
 
                     {/* Fine History */}
