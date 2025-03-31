@@ -103,12 +103,14 @@ table td.returned {
     text-align: center;
 }
 .view-all-link {
-    display: inline-block;
-    background-color: #6c757d;
+    display: block;
+    text-align:center;
+    color: #343a40;
+    background-color:#ffffff;
 }
 .view-all-link:hover {
     text-decoration: underline;
-    color: #343a40;
+    
 }
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
