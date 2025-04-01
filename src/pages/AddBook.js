@@ -21,33 +21,36 @@ function AddBook() {
     });};
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const librarianId = localStorage.getItem("librarianId"); // Retrieve librarianId
-
-    if (!librarianId) {
-        alert("Librarian ID not found! Please log in again.");
-        return;
-    }
-
-    const bookData = { ...book, librarianId: parseInt(librarianId) }; // Include librarian ID
-
-    try {
-        const response = await api.post("/librarian/addBook", bookData, {
-            headers: { "Content-Type": "application/json" },
-        });
-
-        if (response.status === 200) {
-            alert("Book added successfully!");
-            setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
-        } else {
-            alert("Failed to add book.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Error adding book. Please try again.");
-    }
-};
+      e.preventDefault();
+  
+      const librarianId = localStorage.getItem("librarianId"); // Retrieve librarianId
+  
+      if (!librarianId) {
+          alert("Librarian ID not found! Please log in again.");
+          return;
+      }
+  
+      const bookData = { 
+          librarianId: parseInt(librarianId),  // Ensure it's sent separately
+          book: { ...book }  // Nest book data inside a "book" key
+      };
+  
+      try {
+          const response = await api.post("/librarian/addBook", bookData, {
+              headers: { "Content-Type": "application/json" },
+          });
+  
+          if (response.status === 200) {
+              alert("Book added successfully!");
+              setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
+          } else {
+              alert("Failed to add book.");
+          }
+      } catch (error) {
+          console.error("Error:", error);
+          alert("Error adding book. Please try again.");
+      }
+  };
 
   return (
     <>
