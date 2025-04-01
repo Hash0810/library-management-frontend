@@ -47,9 +47,13 @@ const ProfilePage = () => {
     }, [username]);
 
     if (loading) {
-        return <div className="profile-page-container">Loading...</div>;
+        return (
+            <div className="loading-container">
+                <div className="spinner"></div>
+                <p>Loading...</p>
+            </div>
+        );
     }
-
     return (
         <div className="profile-page-container">
             <Navbar role={userRole} />
