@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../api";
 import Navbar from "../components/Navbar"; // Adjust path as needed
 import "../styles/AddBook.css";
+
 function AddBook() {
   const [book, setBook] = useState({
     bookName: "",
@@ -11,45 +12,68 @@ function AddBook() {
     copies: 1,
   });
 
-  
+  const [librarianId, setLibrarianId] = useState(null);
   const userRole = localStorage.getItem("role")?.toUpperCase();
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await api.get("/user/profile"); // Adjust the endpoint as needed
+        if (response.status === 200) {
+          const userData = response.data;
+          if (userData.role && userData.role.toUpperCase() === "LIBRARIAN") {
+            setLibrarianId(userData.id); // Assuming the ID is in userData.id
+          } else {
+            alert("You do not have librarian access.");
+          }
+        } else {
+          alert("Failed to fetch user profile.");
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        alert("Error fetching user profile. Please try again.");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBook({
       ...book,
       [name]: name === "copies" ? parseInt(value) || 0 : value,
-    });};
+    });
+  };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      const librarianId = localStorage.getItem("librarianId"); // Retrieve librarianId
-  
-      if (!librarianId) {
-          alert("Librarian ID not found! Please log in again.");
-          return;
+    e.preventDefault();
+
+    if (!librarianId) {
+      alert("Librarian ID not found! Please log in again.");
+      return;
+    }
+
+    const bookData = {
+      librarianId: librarianId, // Use the fetched librarian ID
+      book: { ...book },
+    };
+
+    try {
+      const response = await api.post("/librarian/addBook", bookData, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.status === 200) {
+        alert("Book added successfully!");
+        setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
+      } else {
+        alert("Failed to add book.");
       }
-  
-      const bookData = { 
-          librarianId: parseInt(librarianId),  // Ensure it's sent separately
-          book: { ...book }  // Nest book data inside a "book" key
-      };
-  
-      try {
-          const response = await api.post("/librarian/addBook", bookData, {
-              headers: { "Content-Type": "application/json" },
-          });
-  
-          if (response.status === 200) {
-              alert("Book added successfully!");
-              setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
-          } else {
-              alert("Failed to add book.");
-          }
-      } catch (error) {
-          console.error("Error:", error);
-          alert("Error adding book. Please try again.");
-      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error adding book. Please try again.");
+    }
   };
 
   return (
