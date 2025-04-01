@@ -5,9 +5,10 @@ import "../styles/Homepage.css";
 
 const Homepage = () => {
     const [userRole, setUserRole] = useState(null);
-    const [books, setBooks] = useState([]); // State to store all books
-    const [searchQuery, setSearchQuery] = useState(""); // State for search input
-    const [filteredBooks, setFilteredBooks] = useState([]); // State for filtered books
+    const [searchQuery, setSearchQuery] = useState("");
+    const [genres, setGenres] = useState([]);
+    const [books, setBooks] = useState([]);
+    const [filteredBooks, setFilteredBooks] = useState([]);
 
     useEffect(() => {
         const username = localStorage.getItem("username");
@@ -20,28 +21,30 @@ const Homepage = () => {
                 .catch((err) => console.error("Error fetching user role:", err));
         }
 
-        // Fetch book inventory from backend
         api.get("/librarian/bookInventory")
-            .then((res) => {
-                setBooks(res.data);
-                setFilteredBooks(res.data); // Initially show all books
-            })
+            .then((res) => setBooks(res.data))
             .catch((err) => console.error("Error fetching books:", err));
+
+        api.get("/librarian/genres")
+            .then((res) => setGenres(res.data))
+            .catch((err) => console.error("Error fetching genres:", err));
     }, []);
 
-    // Handle search input change
-    const handleSearchChange = (event) => {
-        const query = event.target.value.toLowerCase();
+    const handleSearch = (e) => {
+        const query = e.target.value;
         setSearchQuery(query);
 
-        // Filter books based on search query
-        const filtered = books.filter((book) =>
-            book.title.toLowerCase().includes(query) || 
-            book.author.toLowerCase().includes(query) || 
-            book.genre.toLowerCase().includes(query)
-        );
-
-        setFilteredBooks(filtered);
+        if (query.trim() === "") {
+            setFilteredBooks([]);
+        } else {
+            const results = books.filter(
+                (book) =>
+                    book.bookName.toLowerCase().includes(query.toLowerCase()) ||
+                    book.author.toLowerCase().includes(query.toLowerCase()) ||
+                    book.genre.toLowerCase().includes(query.toLowerCase())
+            );
+            setFilteredBooks(results);
+        }
     };
 
     return (
@@ -53,26 +56,33 @@ const Homepage = () => {
                 <div className="search-bar">
                     <input
                         type="text"
-                        placeholder="Search books by title, author, or genre..."
+                        placeholder="Search books..."
                         value={searchQuery}
-                        onChange={handleSearchChange}
+                        onChange={handleSearch}
                     />
                     <button>Search</button>
                 </div>
             </header>
+
             <section className="genres-section">
-                <h2>Available Books</h2>
-                {filteredBooks.length > 0 ? (
-                    <ul className="book-list">
-                        {filteredBooks.map((book) => (
-                            <li key={book.id} className="book-item">
-                                <strong>{book.title}</strong> by {book.author} ({book.genre})
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>No books found.</p>
-                )}
+                <h2>{searchQuery ? "Search Results" : "Genres"}</h2>
+                <ul className="genres-list">
+                    {searchQuery ? (
+                        filteredBooks.length > 0 ? (
+                            filteredBooks.map((book, index) => (
+                                <li key={index} className="genre-item">
+                                    {book.bookName} ({book.author}, {book.genre})
+                                </li>
+                            ))
+                        ) : (
+                            <li className="no-data">No books found.</li>
+                        )
+                    ) : (
+                        genres.map((genre, index) => (
+                            <li key={index} className="genre-item">{genre}</li>
+                        ))
+                    )}
+                </ul>
             </section>
         </div>
     );
