@@ -22,28 +22,32 @@ function AddBook() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await api.post("/librarian/addBook", book, {
-        headers: { "Content-Type": "application/json" },
-      });
 
-      if (response.status === 200) {
-        alert("Book added successfully!");
-        setBook({ bookName: "", author: "", genre: "", available: true });
-      } else {
-        alert("Failed to add book.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      if (error.response) {
-        alert(`Error: ${error.response.data.message || "Failed to add book."}`);
-      } else if (error.request) {
-        alert("Error: No response from server.");
-      } else {
-        alert("Error: Something went wrong.");
-      }
+    const librarianId = localStorage.getItem("librarianId"); // Retrieve librarianId
+
+    if (!librarianId) {
+        alert("Librarian ID not found! Please log in again.");
+        return;
     }
-  };
+
+    const bookData = { ...book, librarianId: parseInt(librarianId) }; // Include librarian ID
+
+    try {
+        const response = await api.post("/librarian/addBook", bookData, {
+            headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.status === 200) {
+            alert("Book added successfully!");
+            setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
+        } else {
+            alert("Failed to add book.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error adding book. Please try again.");
+    }
+};
 
   return (
     <>
