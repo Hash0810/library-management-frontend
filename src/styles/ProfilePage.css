@@ -95,13 +95,22 @@ table td.returned {
     padding: 1rem;
     color: #6c757d;
 }
+/* Loading container */
 .loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ensures full height of the viewport */
-    background-color: #f8f9fa;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1); /* Slight overlay to avoid white screen */
+    position: absolute; /* Ensure it covers the viewport without interfering with the layout */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20; /* Ensure the loading spinner is on top */
 }
+
+/* Spinner styling */
 .spinner {
     width: 50px;
     height: 50px;
@@ -112,11 +121,11 @@ table td.returned {
     margin-bottom: 10px;
 }
 
+/* Keyframe animation for spinning */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 /* No Data Styling */
 .no-data {
     color: #6c757d;
