@@ -55,7 +55,7 @@ function AddBook() {
     }
 
     const bookData = {
-      librarianId: Number(librarianId), // Use the fetched librarian ID
+      librarianId: librarianId, // Use the fetched librarian ID
       book: { ...book },
     };
 
