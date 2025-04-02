@@ -18,7 +18,7 @@ function AddBook() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await api.get("/user/profile"); // Adjust the endpoint as needed
+        const response = await api.get("/api/u/profile"); // Adjust the endpoint as needed
         if (response.status === 200) {
           const userData = response.data;
           if (userData.role && userData.role.toUpperCase() === "LIBRARIAN") {
