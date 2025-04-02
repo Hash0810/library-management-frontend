@@ -16,27 +16,35 @@ function AddBook() {
   const userRole = localStorage.getItem("role")?.toUpperCase();
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await api.get("/api/u/profile"); // Adjust the endpoint as needed
-        if (response.status === 200) {
-          const userData = response.data;
-          if (userData.role && userData.role.toUpperCase() === "LIBRARIAN") {
-            setLibrarianId(userData.id); // Assuming the ID is in userData.id
-          } else {
-            alert("You do not have librarian access.");
-          }
-        } else {
-          alert("Failed to fetch user profile.");
-        }
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-        alert("Error fetching user profile. Please try again.");
-      }
-    };
+  const fetchUserProfile = async () => {
+    try {
+      const username = localStorage.getItem("username"); // Retrieve username from local storage
 
-    fetchUserProfile();
-  }, []);
+      if (!username) {
+        alert("Username not found! Please log in again.");
+        return;
+      }
+
+      const response = await api.post("/api/u/profile", { username });
+
+      if (response.status === 200) {
+        const userData = response.data;
+        if (userData.role && userData.role.toUpperCase() === "LIBRARIAN") {
+          setLibrarianId(userData.id); // Assuming the ID is in userData.id
+        } else {
+          alert("You do not have librarian access.");
+        }
+      } else {
+        alert("Failed to fetch user profile.");
+      }
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      alert("Error fetching user profile. Please try again.");
+    }
+  };
+
+  fetchUserProfile();
+}, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
