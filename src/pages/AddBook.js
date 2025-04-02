@@ -29,8 +29,11 @@ function AddBook() {
 
       if (response.status === 200) {
         const userData = response.data;
+        console.log("Fetched User Data:", userData); // Debugging
+        console.log("User Role:", userData.role); 
         if (userData.role && userData.role.toUpperCase() === "LIBRARIAN") {
-          setLibrarianId(userData.id); // Assuming the ID is in userData.id
+          setLibrarianId(userData.id);
+          console.log("Librarian ID Set:", userData.id);// Assuming the ID is in userData.id
         } else {
           alert("You do not have librarian access.");
         }
@@ -53,7 +56,7 @@ function AddBook() {
       [name]: name === "copies" ? parseInt(value) || 0 : value,
     });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,7 +69,9 @@ function AddBook() {
       librarianId: librarianId, // Use the fetched librarian ID
       book: { ...book },
     };
-
+    
+    console.log("Librarian ID being sent:", bookData.librarianId);
+    console.log("Book Data being sent:", bookData.book);
     try {
       const response = await api.post("/librarian/addBook", bookData, {
         headers: { "Content-Type": "application/json" },
