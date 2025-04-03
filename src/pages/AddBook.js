@@ -58,35 +58,36 @@ function AddBook() {
   };
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!librarianId) {
-      alert("Librarian ID not found! Please log in again.");
-      return;
-    }
-
-    const bookData = {
-      librarianId: librarianId, // Use the fetched librarian ID
-      book: { ...book },
-    };
-    
-    console.log("Librarian ID being sent:", bookData.librarianId);
-    console.log("Book Data being sent:", bookData.book);
-    try {
-      const response = await api.post("/librarian/addBook", bookData, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.status === 200) {
-        alert("Book added successfully!");
-        setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
-      } else {
-        alert("Failed to add book.");
+      e.preventDefault();
+  
+      if (!librarianId) { // Now it's actually the userId
+        alert("User ID not found! Please log in again.");
+        return;
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Error adding book. Please try again.");
-    }
+  
+      const bookData = {
+        userId: librarianId, // Rename this from librarianId to userId
+        book: { ...book },
+      };
+  
+      console.log("User ID being sent:", bookData.userId);
+      console.log("Book Data being sent:", bookData.book);
+  
+      try {
+        const response = await api.post("/librarian/addBook", bookData, {
+          headers: { "Content-Type": "application/json" },
+        });
+  
+        if (response.status === 200) {
+          alert("Book added successfully!");
+          setBook({ bookName: "", author: "", genre: "", available: true, copies: 1 });
+        } else {
+          alert("Failed to add book.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error adding book. Please try again.");
+      }
   };
 
   return (
