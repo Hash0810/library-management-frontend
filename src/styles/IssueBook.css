@@ -1,0 +1,89 @@
+.container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loading, .no-requests {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.controls input, .controls select {
+  padding: 8px;
+  font-size: 16px;
+  width: 48%;
+}
+
+.request-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.request-table th,
+.request-table td {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.request-table th {
+  background-color: #f8f8f8;
+}
+
+.approve {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-right: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.reject {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.approve:hover {
+  background-color: #218838;
+}
+
+.reject:hover {
+  background-color: #c82333;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  margin: 0 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination span {
+  font-weight: bold;
+}
