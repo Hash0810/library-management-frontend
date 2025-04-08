@@ -13,7 +13,23 @@
   text-align: center;
   color: #333;
 }
-
+.controls select {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1 1 48%;
+  min-width: 200px;
+  outline: none;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath fill='%23666' d='M5.516 7.548L10 12.032l4.484-4.484L16 9.064l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
 .loading,
 .no-requests {
   text-align: center;
