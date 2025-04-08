@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
-import "./IssueBook.css";
+import "../styles/IssueBook.css";
 
 function BookRequestManager() {
   const [requests, setRequests] = useState([]);
