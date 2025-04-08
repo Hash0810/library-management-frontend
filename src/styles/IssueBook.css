@@ -2,66 +2,94 @@
   max-width: 960px;
   margin: 40px auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
 }
 
 .title {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
   text-align: center;
+  color: #333;
 }
 
-.loading, .no-requests {
+.loading,
+.no-requests {
   text-align: center;
-  color: #666;
+  color: #888;
   padding: 20px;
+  font-size: 16px;
 }
 
 .controls {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-.controls input, .controls select {
-  padding: 8px;
+.controls input,
+.controls select {
+  padding: 10px 12px;
   font-size: 16px;
-  width: 48%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1 1 48%;
+  min-width: 200px;
+  outline: none;
 }
 
 .request-table {
   width: 100%;
   border-collapse: collapse;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .request-table th,
 .request-table td {
-  padding: 12px 15px;
-  border: 1px solid #ccc;
+  padding: 14px 16px;
   text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 15px;
 }
 
 .request-table th {
-  background-color: #f8f8f8;
+  background-color: #f4f4f4;
+  font-weight: 600;
+  color: #444;
+}
+
+.request-table tbody tr:hover {
+  background-color: #f1f7ff;
 }
 
 .approve {
   background-color: #28a745;
   color: white;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 14px;
   margin-right: 6px;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
 }
 
 .reject {
   background-color: #dc3545;
   color: white;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 14px;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
 }
 
 .approve:hover {
@@ -73,17 +101,91 @@
 }
 
 .pagination {
-  margin-top: 20px;
+  margin-top: 24px;
   text-align: center;
 }
 
 .pagination button {
-  padding: 6px 12px;
+  padding: 8px 16px;
   margin: 0 10px;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
 }
 
 .pagination span {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+/* -------------------- RESPONSIVE STYLES -------------------- */
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+  }
+
+  .controls input,
+  .controls select {
+    width: 100%;
+  }
+
+  .request-table th,
+  .request-table td {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .approve,
+  .reject {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .pagination button {
+    margin: 4px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .request-table {
+    font-size: 13px;
+  }
+
+  .request-table th,
+  .request-table td {
+    padding: 8px 10px;
+  }
+
+  .controls input,
+  .controls select {
+    font-size: 14px;
+  }
+
+  .pagination span {
+    font-size: 14px;
+  }
 }
