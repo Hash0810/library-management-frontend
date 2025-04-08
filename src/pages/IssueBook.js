@@ -10,7 +10,7 @@ function BookRequestManager() {
   const [statusFilter, setStatusFilter] = useState("PENDING");
   const [currentPage, setCurrentPage] = useState(1);
   const requestsPerPage = 5;
-
+  const userRole = localStorage.getItem("role")?.toUpperCase();
   useEffect(() => {
     fetchRequests();
   }, [statusFilter]);
@@ -67,6 +67,7 @@ function BookRequestManager() {
 
   return (
     <div className="container">
+      <Navbar role={userRole}/>
       <h2 className="title">Manage Book Requests</h2>
 
       <div className="controls">
