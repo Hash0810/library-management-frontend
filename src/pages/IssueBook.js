@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
+import Navbar from "../components/Navbar";
 import "../styles/IssueBook.css";
 
 function BookRequestManager() {
