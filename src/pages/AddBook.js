@@ -114,14 +114,6 @@ function AddBook() {
             required
           />
 
-          // <label>Genre:</label>
-          // <input
-          //   type="text"
-          //   name="genre"
-          //   value={book.genre}
-          //   onChange={handleChange}
-          //   required
-          // />
           <label>Number of Copies:</label>
           <input
             type="number"
