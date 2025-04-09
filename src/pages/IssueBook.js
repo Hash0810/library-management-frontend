@@ -23,7 +23,9 @@ function BookRequestManager() {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const res = await api.put(`/api/requests?status=${statusFilter}`);
+      const res = await api.put(`/librarian/requests`, {
+  status: statusFilter
+});
       setRequests(res.data);
     } catch (error) {
       console.error("Error fetching requests:", error);
