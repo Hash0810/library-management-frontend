@@ -12,7 +12,7 @@ const GenerateReceipt = () => {
     setLoading(true);
 
     try {
-      await axios.get(`/librarian/sendReceipt/${username}`);
+      await api.get(`/librarian/sendReceipt/${username}`);
 
       const pdfResponse = await api.get(`/librarian/receipt/${username}`, {
         responseType: "blob",
