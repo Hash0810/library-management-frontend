@@ -34,9 +34,12 @@ function BookRequestManager() {
     }
   };
 
-  const handleAction = async (requestId, action) => {
+  const handleAction = async (requestId, action,studentUsername) => {
     try {
       await api.put(`/librarian/${action}Request`, { requestId });
+      if (action === "approve") {
+        localStorage.setItem("borrowedUser", studentUsername);
+      }
       setRequests(prev => prev.filter(req => req.id !== requestId));
     } catch (error) {
       console.error(`Error trying to ${action} request:`, error);
@@ -114,7 +117,7 @@ function BookRequestManager() {
                   <td>
                     <button
                       className="approve"
-                      onClick={() => handleAction(req.id, "approve")}
+                      onClick={() => handleAction(req.id, "approve", req.student.username)}
                     >
                       Approve
                     </button>
