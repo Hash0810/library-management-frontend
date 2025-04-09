@@ -22,6 +22,7 @@ import LibrarianInfo from "./pages/LibrarianInfo";
 import BorrowBook from "./pages/BorrowBook";
 import ReturnBook from "./pages/ReturnBook";
 import BookHistory from "./pages/BookHistory";
+import GenerateReceipt from "./pages/GenerateReceipt";
 
 function App() {
   const { isAuthenticated, userRole } = useSelector((state) => state.auth);
@@ -77,6 +78,7 @@ function App() {
         <Route path="/librarian-info" element={isAuthenticated ? <LibrarianInfo /> : <Navigate to="/" />} />
         <Route path="/book-inventory" element={isAuthenticated ? <BookInventory /> : <Navigate to="/" />} />
         <Route path="/book-history" element={isAuthenticated ? <BookHistory /> : <Navigate to="/" />} />
+        <Route path="/generate-receipt" element={isAuthenticated ? <GenerateReceipt /> : <Navigate to="/" />} />
         <Route path="/profile" element={isAuthenticated && isOtpVerified ? <ProfilePage /> : <Navigate to="/" />} />
         <Route path="/borrow-books" element={isAuthenticated ? <BorrowBook /> : <Navigate to="/" />} />
         <Route path="/return-books" element={isAuthenticated ? <ReturnBook /> : <Navigate to="/" />} />
