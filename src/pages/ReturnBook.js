@@ -17,8 +17,7 @@ function ReturnBook() {
     const bookIdInt = parseInt(bookId, 10);
     try {
       const response = await api.post("/api/u/books/return", { username, bookId:bookIdInt });
-      const result = await response.text();
-      setMessage(result);
+      setMessage(response.data);
     } catch (error) {
       console.error("Error returning book:", error);
       setMessage("Failed to return book. Please try again.");
