@@ -1,18 +1,18 @@
-// src/pages/OTPVerification.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
-import '../styles/Otp.css';
-// src/pages/OTPVerification.js
+import "../styles/Otp.css";
 
 const OTPVerification = ({ onSuccess }) => {
     const [otp, setOtp] = useState(["", "", "", ""]);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
     const email = localStorage.getItem("resetEmail") || localStorage.getItem("otpEmail");
-    const type = localStorage.getItem("otpType"); // Get type from local storage
-    const username = localStorage.getItem("username"); 
+    const type = localStorage.getItem("otpType");
+    const username = localStorage.getItem("username");
+
     useEffect(() => {
         if (!email) {
             setError("Email not found. Please enter your email.");
@@ -31,55 +31,65 @@ const OTPVerification = ({ onSuccess }) => {
     };
 
     const handleSubmit = async () => {
-    const otpValue = otp.join("");
-    if (otpValue.length !== 4) {
-        setError("Please enter a 4-digit OTP.");
-        return;
-    }
-    setIsLoading(true);
-    setError("");
-    try {
-        const urlMap = {
-            signup: "/api/u/verify-signup-otp",
-            login: "/api/u/verify-login-otp",
-            "reset-password": "/api/u/verify-reset-password-otp",
-            "admin-signup": "/api/u/verify-admin-signup-otp",
-        };
-        const url = urlMap[type]; 
-        if (!url) {
-            setError("Invalid OTP type.");
+        const otpValue = otp.join("");
+        if (otpValue.length !== 4) {
+            setError("Please enter a 4-digit OTP.");
             return;
         }
 
-        const response = await api.post(url, {
-            email: email,
-            otp: otpValue
-        }, {
-            headers: { "Content-Type": "application/json" }
-        });
+        setIsLoading(true);
+        setError("");
 
-        if (response.data.includes("successful")) {
-            localStorage.setItem('isAuthenticated', 'true');
-            if (response.data.username) {
-                localStorage.setItem("username", response.data.username);
+        try {
+            const urlMap = {
+                signup: "/api/u/verify-signup-otp",
+                login: "/api/u/verify-login-otp",
+                "reset-password": "/api/u/verify-reset-password-otp",
+                "admin-signup": "/api/u/verify-admin-signup-otp",
+            };
+
+            const url = urlMap[type];
+            if (!url) {
+                setError("Invalid OTP type.");
+                return;
             }
-            if (type === "reset-password") {
+
+            const payload = url.includes("reset-password") || url.includes("signup")
+                ? { email, otp: otpValue }
+                : { email, otp: otpValue }; // Keeping same shape for all
+
+            const response = await api.post(url, payload, {
+                headers: { "Content-Type": "application/json" }
+            });
+
+            if (response.data.message && response.data.message.includes("success")) {
+                localStorage.setItem("isAuthenticated", "true");
+
+                if (response.data.username) {
+                    localStorage.setItem("username", response.data.username);
+                }
+
+                if (response.data.token) {
+                    localStorage.setItem("jwtToken", response.data.token);
+                }
+
                 onSuccess();
-                navigate("/reset-password"); 
+
+                if (type === "reset-password") {
+                    navigate("/reset-password");
+                } else {
+                    navigate("/", { replace: true });
+                }
             } else {
-                onSuccess();
-                navigate("/", { replace: true });
+                setError(response.data.message || "Invalid OTP. Please try again.");
             }
-        } else {
-            setError("Invalid OTP. Please try again.");
+        } catch (error) {
+            console.error("OTP verification error:", error);
+            setError("Failed to verify OTP. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
-    } catch (error) {
-        setError("Failed to verify OTP. Please try again.");
-    } finally {
-        setIsLoading(false);
-    }
-};
-
+    };
 
     return (
         <div className="otp-container">
