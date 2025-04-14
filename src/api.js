@@ -9,27 +9,45 @@ const api = axios.create({
   }
 });
 
+// 🔐 Add JWT to requests
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('jwtToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// ❗ Handle errors + Auto logout
 api.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     if (error.response) {
-      // Custom error messages based on status code
-      switch (error.response.status) {
+      const status = error.response.status;
+      const logoutAndRedirect = () => {
+        localStorage.clear();
+        window.location.href = "/login"; // Change if your login path is different
+      };
+
+      switch (status) {
         case 401:
-          return Promise.reject('Invalid credentials');
         case 403:
-          return Promise.reject('Forbidden - check permissions');
+          logoutAndRedirect();
+          return Promise.reject("Session expired. Please login again.");
         case 404:
-          return Promise.reject('Resource not found');
+          return Promise.reject("Resource not found");
         case 405:
-          return Promise.reject('Method not allowed - check endpoint');
+          return Promise.reject("Method not allowed - check endpoint");
         case 500:
-          return Promise.reject('Server error - please try later');
+          return Promise.reject("Server error - please try later");
         default:
-          return Promise.reject(error.response.data?.message || 'Request failed');
+          return Promise.reject(error.response.data?.message || "Request failed");
       }
     }
-    return Promise.reject('Network error - check connection');
+    return Promise.reject("Network error - check connection");
   }
 );
 
