@@ -34,7 +34,7 @@ const ProfilePage = () => {
 
 
                 // Fetch fine history
-                const fineRes = await api.post(`/api/u/fine-history`, { username });
+                const fineRes = await api.get(`/api/u/fine-history`);
                 setFineHistory(fineRes.data);
             } catch (error) {
                 console.error("Error fetching profile data:", error);
